@@ -13,13 +13,14 @@
             display: flex;
             flex-direction: column;
             align-items: center; /* Pusatkan elemen secara horizontal */
-            justify-content: space-between; /* Mengatur jarak antara header, kontainer, dan footer */
+            justify-content: center; /* Pusatkan elemen secara vertikal */
             min-height: 100vh;
             overflow-x: hidden; /* Hilangkan scroll horizontal jika ada */
+            text-align: center; /* Pastikan teks di dalam elemen terpusat */
         }
         .container {
             background-color: #a8f0c6;
-            width: 100%;
+            width: 90%; /* Gunakan persentase untuk responsivitas */
             max-width: 400px;
             padding: 20px;
             text-align: center;
@@ -31,19 +32,20 @@
             margin: 0 auto; /* Pastikan kontainer berada di tengah */
         }
         h1 {
-            font-size: 16px; /* Font pixelated biasanya lebih besar, jadi ukuran dikurangi */
+            font-size: 5vw; /* Gunakan ukuran font responsif */
             color: #000000;
             margin-bottom: 20px;
         }
         .header-image {
-            width: 150px;
+            width: 40vw; /* Gunakan ukuran responsif */
+            max-width: 150px;
             margin: 0 auto 20px;
         }
         input {
-            width: 100%;
-            max-width: 300px; /* Batasi lebar maksimum untuk responsivitas */
+            width: 90%; /* Gunakan persentase untuk responsivitas */
+            max-width: 300px;
             padding: 12px; /* Tambahkan padding untuk kenyamanan */
-            font-size: 14px; /* Perbesar ukuran font untuk keterbacaan */
+            font-size: 4vw; /* Gunakan ukuran font responsif */
             border: none;
             border-radius: 5px;
             margin-bottom: 20px;
@@ -55,10 +57,10 @@
             color: #666;
         }
         button {
-            width: 100%;
-            max-width: 300px; /* Batasi lebar maksimum untuk responsivitas */
+            width: 90%; /* Gunakan persentase untuk responsivitas */
+            max-width: 300px;
             padding: 12px; /* Tambahkan padding untuk kenyamanan */
-            font-size: 14px; /* Perbesar ukuran font untuk keterbacaan */
+            font-size: 4vw; /* Gunakan ukuran font responsif */
             font-weight: bold;
             color: #000000;
             background-color: #ffc107;
@@ -75,47 +77,32 @@
         }
         #error {
             color: red;
-            font-size: 10px; /* Sesuaikan ukuran font untuk font pixelated */
+            font-size: 3vw; /* Gunakan ukuran font responsif */
             margin-top: 10px;
             display: none;
         }
         .copyright {
-            font-size: 7px; /* Ukuran kecil untuk teks copyright */
+            font-size: 2.5vw; /* Gunakan ukuran font responsif */
             color: #555;
             margin-top: 10px;
         }
-        .top-banner, .bottom-banner {
-            width: 100%; /* Pastikan elemen mencakup seluruh lebar layar */
-            height: 150px; /* Tinggi tetap untuk gambar */
-            margin: 0; /* Hilangkan margin */
-            padding: 0; /* Hilangkan padding */
-            display: flex;
-            align-items: flex-end; /* Pastikan gambar menempel di bagian bawah untuk top-banner */
-            justify-content: center;
-            overflow: hidden; /* Sembunyikan bagian gambar yang melampaui area */
-        }
-        .top-banner img {
-            width: 100%; /* Pastikan gambar mencakup seluruh lebar */
-            height: auto; /* Jaga proporsi gambar */
-            object-fit: cover; /* Potong gambar agar sesuai dengan area */
-            object-position: bottom; /* Pastikan bagian bawah gambar terlihat */
-        }
-        .bottom-banner {
-            align-items: flex-start; /* Pastikan gambar menempel di bagian atas untuk bottom-banner */
-        }
-        .bottom-banner img {
-            width: 100%; /* Pastikan gambar mencakup seluruh lebar */
-            height: auto; /* Jaga proporsi gambar */
-            object-fit: cover; /* Potong gambar agar sesuai dengan area */
-            object-position: top; /* Pastikan bagian atas gambar terlihat */
-            transform: rotate(180deg); /* Balik gambar untuk bagian bawah */
+        @media (min-width: 600px) {
+            h1 {
+                font-size: 24px; /* Ukuran font untuk layar besar */
+            }
+            input, button {
+                font-size: 14px; /* Ukuran font untuk layar besar */
+            }
+            #error {
+                font-size: 12px; /* Ukuran font untuk layar besar */
+            }
+            .copyright {
+                font-size: 10px; /* Ukuran font untuk layar besar */
+            }
         }
     </style>
 </head>
 <body>
-    <div class="top-banner">
-        <img src="bagianatasgif.gif" alt="Bagian Atas">
-    </div>
     <div class="container">
         <h1>You Got a Message!</h1>
         <img src="amplopwdx1.gif" alt="Amplop GIF" class="header-image">
@@ -124,10 +111,6 @@
         <p id="error">Uhh.. tidak ada namamu di list, coba tanya Farell dlu hehe.</p>
         <p class="copyright">© All rights reserved by WedXotro</p> <!-- Teks copyright -->
     </div>
-    <div class="bottom-banner">
-        <img src="bagianatasgif.gif" alt="Bagian Bawah (Mirrored)">
-    </div>
-    
     <script>
         function verifikasiNama() {
             const nama = document.getElementById("nama").value.trim().toLowerCase();
