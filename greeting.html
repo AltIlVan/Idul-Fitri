@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Idul Fitri!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            text-align: center;
+            background-color: #5ccaf5; /* Latar belakang polos */
+            font-family: 'Press Start 2P', Arial, sans-serif;
+            padding: 50px;
+            display: flex;
+            flex-direction: column; /* Atur elemen dalam kolom */
+            justify-content: flex-start; /* Mulai dari atas */
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            gap: 20px; /* Tambahkan jarak antar elemen */
+        }
+        h1 {
+            font-size: 24px; /* Ukuran font besar untuk header */
+            color: #fff; /* Ubah warna teks menjadi putih agar kontras dengan background */
+            background-color: #009688; /* Tambahkan background hijau */
+            padding: 10px 20px; /* Tambahkan padding untuk jarak antara teks dan tepi background */
+            border-radius: 10px; /* Membuat sudut background melengkung */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan untuk efek */
+        }
+        .avatar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px; /* Tambahkan jarak antara avatar dan bubble */
+        }
+        .avatar {
+            width: 150px;
+            height: auto;
+        }
+        .bubble {
+            background: white;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 10px;
+            max-width: 350px; /* Lebar bubble diperbesar */
+            text-align: left;
+            font-size: 12px;
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: none; /* Awalnya disembunyikan */
+            position: relative; /* Ubah ke relative untuk memungkinkan elemen anak diposisikan */
+        }
+        .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%; /* Pusatkan segitiga di bawah bubble */
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top-color: white; /* Segitiga kecil di bawah bubble */
+        }
+        .signature {
+            position: absolute;
+            bottom: -20px; /* Geser ke bawah bubble */
+            right: 10px; /* Geser ke kanan bubble */
+            font-style: italic;
+            color: #fab010; /* Warna teks */
+            font-size: 12px; /* Ukuran font kecil */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Tambahkan drop shadow */
+        }
+        .bottom-gif {
+            position: fixed; /* Menempel di bagian bawah halaman */
+            bottom: 0;
+            left: 0;
+            width: 100%; /* Memastikan gambar mencakup seluruh lebar */
+            height: auto; /* Menjaga proporsi gambar */
+            z-index: -1; /* Menempatkan gambar di belakang konten utama */
+        }
+    </style>
+</head>
+<body>
+    <h1>Selamat Hari Raya Idul Fitri All</h1> <!-- Header di atas bubble -->
+    <div class="avatar-container">
+        <img src="avatarspeaking2.gif" alt="Avatar" class="avatar">
+        <div class="bubble" id="bubbleText"></div>
+    </div>
+    <img src="kereta.gif" alt="Selamat Idul Fitri GIF" class="bottom-gif"> <!-- GIF di bagian bawah -->
+    
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const nama = getQueryParam("name");
+        const daftarUcapan = {
+            "farell": "Selamat Idul Fitri, Farell! Semoga berkah selalu menyertaimu.",
+            "ariel": "Ariel, mohon maaf lahir dan batin! ah udahlah udah gede juga.",
+            "achfan": "Achfan, gausah alay, btw met lebaran hehe",
+            "abil": "Abil, semoga hari raya ini membawa Monster Hunter Wilds ke library kita.",
+            "rey": "Reytarded mf selamat hari raya, may this eid bring a girl for ya lonely ahh",
+            "levina": "Met Hari raya Lebaran Pinullll, maaf ya aku banyak salahnya hehe.",
+            "bintang": "Bintang, selamat lebaran, btw statkomnya gimana",
+            "adel": "Adel, mohon maaf lahir dan batin! Achfan jangan diambekin terus wkwk.",
+            "zanik": "Zanik, semoga Idul Fitri ini membawa kebahagiaan dan saldo paypalmu semoga kunjung tiba",
+            "naysa": "Naysa, semoga hari raya ini penuh berkah dan kebahagiaan. Btw zenith selena dh dapet?",
+            "risa": "Risa, mohon maaf lahir dan batin! komis gratis bisa ga?",
+            "revita": "Halo Rev, semoga Idul Fitri ini membawa kedamaian dan kebahagiaan.",
+            "rendy": "Halo Mas Rendy, selamat merayakan Idul Fitri! Semoga berkah selalu menyertaimu.",
+            "clara": "Clara, mohon maaf lahir dan batin! Semoga hari ini penuh kebahagiaan.",
+            "queenta": "Queenta, dan yap semoga Idul Fitri ini membawa kebahagiaan untukmu dan keluarga.",
+            "nathan": "Halo Cina semoga hari raya ini penuh berkah dan kebahagiaan ya walau kamu cina.",
+            "adit": "Adit, mohon maaf lahir dan batin! Nikmati hari yang indah ini.",
+            "fahim": "Fagim, semoga Idul Fitri ini membawa kedamaian dan kebahagiaan, btw warnet ayo warnet",
+            "dany": "Dany, taik gajadi nonton, btw selamat hari raya idul fitri ya, thr dong",
+            "intan": "Halo Tan, mon map yh kalau aku ada salah hehe.",
+            "arya": "stupid ahh jawa where is my thr, but eid mubarak tho.",
+            "putra": "Ts... doesnt pmo cuz its lebaran, yippie",
+            "dandi": "Oleh oleh dari jepang bisa menjadi ide thr yang bagus, cuma bilang aja sih.",
+            "aza": "Yusuf, selamat merayakan Idul Fitri! Semoga berkah selalu menyertaimu.",
+            "rizal": "Alexa, mohon maaf lahir dan batin! Nikmati hari yang indah ini.",
+            "ilham": "Terima kasih telah menjadi komting yang baik selama ini.",
+            "kai": "Hai Kai, btw abis lebaran lu ke pesantren?.",
+            "nabila": "Btw parah sih kemarin bukber ama Jilan aku ga dikabari, btw met hari raya yah.",
+            "Jalar": "Selamat lebaran sepuh pokemon, btw seringin nimbrung grup plis.",
+            "kira": "Walau lebaran ini kamu masih sibuk kerja, tapi... ya semangat ya, btw pp jojonya bagus ga.",
+            "andin": "Andin, semoga Idul Fitri ini membawa kebahagiaan dan kedamaian yh, btw gimana persiapan kulyeahnya",
+            "kun": "Aku tahu kamu raja iblis, jadi selamat karena telah kembali ke bumi",
+            "rafi": "Hi RF, gimana kabarnya? met hari raya ya.",
+            "hadiid": "Hadiid, semoga Idul Fitri ini membawa kebahagiaan dan kedamaian.",
+        };
+
+        function typeText(text, elementId, delay = 50) {
+            const element = document.getElementById(elementId);
+            element.style.display = "block"; // Tampilkan bubble
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, delay);
+                } else {
+                    // Tambahkan "- Farell" di luar bubble
+                    const signature = document.createElement("span");
+                    signature.textContent = "- Farell";
+                    signature.className = "signature";
+                    element.appendChild(signature);
+                }
+            }
+            type();
+        }
+
+        if (daftarUcapan[nama]) {
+            const ucapan = daftarUcapan[nama];
+            typeText(ucapan, "bubbleText");
+        } else {
+            document.body.innerHTML = "<h1>Uh... gada tuh namamu di daftar, mff yh.</h1>";
+        }
+    </script>
+</body>
+</html>

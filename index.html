@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi Surat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Font Pixelated -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Press Start 2P', Arial, sans-serif; /* Menggunakan font pixelated */
+            background-color: #a8f0c6;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Pusatkan elemen secara horizontal */
+            justify-content: space-between; /* Mengatur jarak antara header, kontainer, dan footer */
+            min-height: 100vh;
+            overflow-x: hidden; /* Hilangkan scroll horizontal jika ada */
+        }
+        .container {
+            background-color: #a8f0c6;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Memastikan elemen di dalam kontainer terpusat */
+            justify-content: center; /* Memastikan elemen di dalam kontainer terpusat secara vertikal */
+            margin: 0 auto; /* Pastikan kontainer berada di tengah */
+        }
+        h1 {
+            font-size: 16px; /* Font pixelated biasanya lebih besar, jadi ukuran dikurangi */
+            color: #000000;
+            margin-bottom: 20px;
+        }
+        .header-image {
+            width: 150px;
+            margin: 0 auto 20px;
+        }
+        input {
+            width: 100%;
+            max-width: 300px; /* Batasi lebar maksimum untuk responsivitas */
+            padding: 12px; /* Tambahkan padding untuk kenyamanan */
+            font-size: 14px; /* Perbesar ukuran font untuk keterbacaan */
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: #d2f5e3;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan */
+        }
+        input::placeholder {
+            color: #666;
+        }
+        button {
+            width: 100%;
+            max-width: 300px; /* Batasi lebar maksimum untuk responsivitas */
+            padding: 12px; /* Tambahkan padding untuk kenyamanan */
+            font-size: 14px; /* Perbesar ukuran font untuk keterbacaan */
+            font-weight: bold;
+            color: #000000;
+            background-color: #ffc107;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan */
+        }
+        button:hover {
+            background-color: #e0a800;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tambahkan efek bayangan saat hover */
+        }
+        #error {
+            color: red;
+            font-size: 10px; /* Sesuaikan ukuran font untuk font pixelated */
+            margin-top: 10px;
+            display: none;
+        }
+        .copyright {
+            font-size: 7px; /* Ukuran kecil untuk teks copyright */
+            color: #555;
+            margin-top: 10px;
+        }
+        .top-banner, .bottom-banner {
+            width: 100%; /* Pastikan elemen mencakup seluruh lebar layar */
+            height: 150px; /* Tinggi tetap untuk gambar */
+            margin: 0; /* Hilangkan margin */
+            padding: 0; /* Hilangkan padding */
+            display: flex;
+            align-items: flex-end; /* Pastikan gambar menempel di bagian bawah untuk top-banner */
+            justify-content: center;
+            overflow: hidden; /* Sembunyikan bagian gambar yang melampaui area */
+        }
+        .top-banner img {
+            width: 100%; /* Pastikan gambar mencakup seluruh lebar */
+            height: auto; /* Jaga proporsi gambar */
+            object-fit: cover; /* Potong gambar agar sesuai dengan area */
+            object-position: bottom; /* Pastikan bagian bawah gambar terlihat */
+        }
+        .bottom-banner {
+            align-items: flex-start; /* Pastikan gambar menempel di bagian atas untuk bottom-banner */
+        }
+        .bottom-banner img {
+            width: 100%; /* Pastikan gambar mencakup seluruh lebar */
+            height: auto; /* Jaga proporsi gambar */
+            object-fit: cover; /* Potong gambar agar sesuai dengan area */
+            object-position: top; /* Pastikan bagian atas gambar terlihat */
+            transform: rotate(180deg); /* Balik gambar untuk bagian bawah */
+        }
+    </style>
+</head>
+<body>
+    <div class="top-banner">
+        <img src="bagianatasgif.gif" alt="Bagian Atas">
+    </div>
+    <div class="container">
+        <h1>You Got a Message!</h1>
+        <img src="amplopwdx1.gif" alt="Amplop GIF" class="header-image">
+        <input type="text" id="nama" placeholder="Nama Panggilan Penerima...">
+        <button onclick="verifikasiNama()">Buka Surat</button>
+        <p id="error">Uhh.. tidak ada namamu di list, coba tanya Farell dlu hehe.</p>
+        <p class="copyright">© All rights reserved by WedXotro</p> <!-- Teks copyright -->
+    </div>
+    <div class="bottom-banner">
+        <img src="bagianatasgif.gif" alt="Bagian Bawah (Mirrored)">
+    </div>
+    
+    <script>
+        function verifikasiNama() {
+            const nama = document.getElementById("nama").value.trim().toLowerCase();
+            const daftarNama = [
+                "farell", "ariel", "achfan", "abil", "rey", "levina", "bintang", "adel", "zanik", "naysa",
+                "risa", "revita", "rendy", "clara", "queenta", "nathan", "adit", "fahim", "dany", "intan",
+                "arya", "putra", "dandi", "aza", "rizal", "ilham", "kai", "nabila", "jalar", "kira", "andin", "kun", "rafi", "hadiid"
+            ]; // Daftar nama yang valid
+            
+            if (daftarNama.includes(nama)) {
+                window.location.href = `greeting.html?name=${nama}`;
+            } else {
+                document.getElementById("error").style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
